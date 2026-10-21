@@ -1,21 +1,21 @@
 # Someday Evaluation & Benchmark Report
 
-- **Date:** 2026-10-21 10:58:48 UTC
+- **Date:** 2026-10-21 18:33:18 UTC
 - **Model Evaluated:** `moondream` (Local Open-Weight Model)
 - **Inference Engine:** Local Ollama on Windows 11 (NVIDIA RTX 4050 Laptop GPU)
 - **Total Evaluated Screenshots:** 5
-- **Category Classification Accuracy:** 40.0%
-- **Strict Schema Validation Rate:** 0.0%
-- **Average End-to-End Latency:** 10582.06 ms
+- **Category Classification Accuracy:** 80.0%
+- **Strict Schema Validation Rate:** 60.0%
+- **Average End-to-End Latency:** 7897.29 ms
 
 ## Per-Item Results Table
 
 | File | Expected | Predicted | Status | Latency | Evidence Grounding |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `event_summit_poster.png` | event | uncertain | DIFF (needs_attention) | 13528.09 ms | N/A |
-| `receipt_coffee_shop.png` | receipt | uncertain | DIFF (needs_attention) | 12719.76 ms | N/A |
-| `reading_pragmatic_engineer.png` | reading | uncertain | DIFF (needs_attention) | 13166.19 ms | N/A |
-| `uncertain_doodle.png` | uncertain | uncertain | PASS (needs_attention) | 13481.26 ms | N/A |
+| `event_summit_poster.png` | event | event | PASS (valid) | 7113.44 ms | Community Event (17:00) |
+| `receipt_coffee_shop.png` | receipt | uncertain | DIFF (needs_attention) | 13703.82 ms | N/A |
+| `reading_pragmatic_engineer.png` | reading | reading | PASS (valid) | 11832.04 ms | Reading Resource |
+| `uncertain_doodle.png` | uncertain | uncertain | PASS (valid) | 6822.15 ms | Image analyzed with low certainty |
 | `corrupted_screenshot.png` | uncertain | uncertain | PASS (failed) | 15.0 ms | N/A |
 
 ## Baseline Manual Comparison

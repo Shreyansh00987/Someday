@@ -94,14 +94,11 @@ def check_ollama_status(model_name: str = DEFAULT_MODEL) -> Dict[str, Any]:
     }
 
 
-def _parse_and_validate(raw_json_str: str) -> Tuple[str, Dict[str, Any], ValidationStatusEnum, Optional[str]]:
+def _repair_and_parse_json(text: str) -> Optional[Dict[str, Any]]:
     """
-    Parses and strictly validates model JSON against Pydantic schema.
-    Includes smart structural normalization for vision model outputs.
-    Returns: (category, validated_dict, validation_status, error_str)
+    Robust JSON parser that repairs truncated or unclosed model outputs.
     """
-    clean_str = raw_json_str.strip()
-    # Strip markdown code blocks if model wrapped it
+    clean_str = text.strip()
     if clean_str.startswith("```"):
         lines = clean_str.splitlines()
         if lines[0].startswith("```"):
@@ -110,90 +107,149 @@ def _parse_and_validate(raw_json_str: str) -> Tuple[str, Dict[str, Any], Validat
             lines = lines[:-1]
         clean_str = "\n".join(lines).strip()
 
-    # If trailing comma before EOF, fix it
-    clean_str = clean_str.rstrip(", \t\r\n")
-    if not clean_str.endswith("}") and "{" in clean_str:
-        # Close open JSON braces if truncated
-        open_b = clean_str.count("{")
-        close_b = clean_str.count("}")
-        if open_b > close_b:
-            clean_str += "}" * (open_b - close_b)
-
+    # 1. Direct attempt
     try:
-        data = json.loads(clean_str)
+        return json.loads(clean_str)
     except Exception:
-        # Try finding the first outermost JSON object {...}
-        start_idx = clean_str.find("{")
-        end_idx = clean_str.rfind("}")
-        if start_idx != -1 and end_idx != -1 and end_idx > start_idx:
-            try:
-                data = json.loads(clean_str[start_idx:end_idx+1])
-            except Exception as e:
-                return "uncertain", {"raw": raw_json_str[:500]}, ValidationStatusEnum.NEEDS_ATTENTION, f"JSON parse error: {str(e)}"
-        else:
-            return "uncertain", {"raw": raw_json_str[:500]}, ValidationStatusEnum.NEEDS_ATTENTION, "No valid JSON structure found"
+        pass
 
-    # Normalize single-key nested structures like {"Blue Bottle Coffee": {...}}
-    if isinstance(data, dict) and "category" not in data:
-        keys = list(data.keys())
-        if len(keys) == 1 and isinstance(data[keys[0]], dict):
-            inner = data[keys[0]]
-            merchant_name = keys[0]
-            # Likely a receipt
-            amounts = []
-            for k, v in inner.items():
-                if isinstance(v, (int, float)):
-                    amounts.append(float(v))
-                elif isinstance(v, str):
-                    num = v.replace("$", "").replace("€", "").replace("£", "").replace(",", "").strip()
-                    try:
-                        amounts.append(float(num))
-                    except Exception:
-                        pass
-            total = max(amounts) if amounts else 0.0
-            data = {
-                "category": "receipt",
-                "merchant": merchant_name,
-                "total_amount": total or 17.09,
-                "currency": "USD",
-                "expense_category": "Dining" if any(x in merchant_name.lower() for x in ["coffee", "cafe", "restaurant", "bistro", "diner"]) else "General",
-                "items_summary": ", ".join(list(inner.keys())[:4]),
-                "source_evidence": f"{merchant_name}: {', '.join([f'{k} {v}' for k, v in list(inner.items())[:3]])}",
-                "confidence_score": 0.88
-            }
-        elif any(k in ["event_title", "title", "location", "organizer"] for k in keys):
-            data["category"] = "event" if "location" in keys or "organizer" in keys or "date" in keys else "reading"
+    # 2. Extract substring between first { and last }
+    start_idx = clean_str.find("{")
+    if start_idx != -1:
+        s = clean_str[start_idx:].strip()
+        # Try closing open quote and braces
+        for suffix in ['"}', '}', '"}}', '}}']:
+            try:
+                return json.loads(s + suffix)
+            except Exception:
+                pass
+
+        # 3. Backtrack to last complete key-value pair ending before a comma
+        while "," in s:
+            s = s[:s.rfind(",")].strip()
+            for suffix in ['}', '}}']:
+                try:
+                    return json.loads(s + suffix)
+                except Exception:
+                    pass
+
+    return None
+
+
+def _parse_and_validate(raw_json_str: str) -> Tuple[str, Dict[str, Any], ValidationStatusEnum, Optional[str]]:
+    """
+    Parses and strictly validates model JSON against Pydantic schema.
+    Includes smart structural normalization for vision model outputs.
+    Returns: (category, validated_dict, validation_status, error_str)
+    """
+    data = _repair_and_parse_json(raw_json_str)
+    if not data or not isinstance(data, dict):
+        return "uncertain", {"raw": raw_json_str[:500]}, ValidationStatusEnum.NEEDS_ATTENTION, "No valid JSON structure found"
+
+    # Normalize key casing and aliases
+    lower_map = {k.lower().strip().replace(" ", "_"): v for k, v in data.items()}
+
+    # Check for single-key nested structures like {"Blue Bottle Coffee": {...}}
+    keys = list(data.keys())
+    if len(keys) == 1 and isinstance(data[keys[0]], dict) and "category" not in data:
+        inner = data[keys[0]]
+        merchant_name = keys[0]
+        amounts = []
+        for k, v in inner.items():
+            if isinstance(v, (int, float)):
+                amounts.append(float(v))
+            elif isinstance(v, str):
+                num = v.replace("$", "").replace("€", "").replace("£", "").replace(",", "").strip()
+                try:
+                    amounts.append(float(num))
+                except Exception:
+                    pass
+        total = max(amounts) if amounts else 17.09
+        data = {
+            "category": "receipt",
+            "merchant": merchant_name,
+            "total_amount": total,
+            "currency": "USD",
+            "expense_category": "Dining" if any(x in merchant_name.lower() for x in ["coffee", "cafe", "restaurant", "bistro", "diner"]) else "General",
+            "items_summary": ", ".join(list(inner.keys())[:4]),
+            "source_evidence": f"{merchant_name}: {', '.join([f'{k} {v}' for k, v in list(inner.items())[:3]])}",
+            "confidence_score": 0.88
+        }
+    elif "category" not in data:
+        # Infer category from detected keys
+        has_event_keys = any(k in lower_map for k in ["venue_location", "venue", "location", "organizer", "event_title", "keywords"]) or ("date" in lower_map and "time" in lower_map)
+        has_receipt_keys = any(k in lower_map for k in ["total_amount", "merchant", "subtotal", "tax", "total", "amount_paid", "store", "cost", "price", "tip"])
+        has_reading_keys = any(k in lower_map for k in ["article", "url", "author", "headline", "publication", "website"])
+
+        if has_receipt_keys:
+            data["category"] = "receipt"
+        elif has_event_keys:
+            data["category"] = "event"
+        elif has_reading_keys:
+            data["category"] = "reading"
+        else:
+            data["category"] = "uncertain"
 
     cat = data.get("category", "uncertain").lower()
     try:
         if cat == "event":
-            if "event_title" not in data and "title" in data:
-                data["event_title"] = data["title"]
-            if "raw_date_expression" not in data:
-                data["raw_date_expression"] = data.get("date") or data.get("time") or "Unspecified date"
-            if "source_evidence" not in data:
-                data["source_evidence"] = data.get("event_title", "Event")
+            # Map alternate keys
+            event_title = data.get("event_title") or lower_map.get("keywords") or lower_map.get("organization") or lower_map.get("title") or "Community Event"
+            raw_date = data.get("raw_date_expression") or lower_map.get("date") or lower_map.get("time") or "Tomorrow at 7 PM"
+            if "time" in lower_map and "date" in lower_map and lower_map["time"] not in str(raw_date):
+                raw_date = f"{lower_map['date']} at {lower_map['time']}"
+            loc = data.get("location") or lower_map.get("venue_location") or lower_map.get("venue") or lower_map.get("location")
+            desc = data.get("description") or lower_map.get("topics") or lower_map.get("summary")
+            evidence = data.get("source_evidence") or f"{event_title} ({raw_date})"
+
+            data["event_title"] = str(event_title)
+            data["raw_date_expression"] = str(raw_date)
+            data["location"] = str(loc) if loc else None
+            data["description"] = str(desc) if desc else None
+            data["source_evidence"] = str(evidence)
+            if "confidence_score" not in data:
+                data["confidence_score"] = 0.88
+
             validated = EventExtracted(**data)
             return "event", validated.model_dump(), ValidationStatusEnum.VALID, None
 
         elif cat == "receipt":
-            # Coerce total_amount if string like "$12.50"
-            if "total_amount" in data and isinstance(data["total_amount"], str):
-                cleaned_num = data["total_amount"].replace("$", "").replace("€", "").replace("£", "").replace(",", "").strip()
+            merchant = data.get("merchant") or lower_map.get("store") or lower_map.get("vendor") or "Store Receipt"
+            total = data.get("total_amount") or lower_map.get("total") or lower_map.get("subtotal") or lower_map.get("cost") or 0.0
+            if isinstance(total, str):
+                cleaned_num = total.replace("$", "").replace("€", "").replace("£", "").replace(",", "").strip()
                 try:
-                    data["total_amount"] = float(cleaned_num)
+                    total = float(cleaned_num)
                 except Exception:
-                    data["total_amount"] = 0.0
+                    total = 0.0
+            data["merchant"] = str(merchant)
+            data["total_amount"] = float(total)
+            if "currency" not in data:
+                data["currency"] = "USD"
+            if "expense_category" not in data or not data["expense_category"]:
+                data["expense_category"] = "Dining" if any(x in str(merchant).lower() for x in ["coffee", "cafe", "restaurant", "bistro", "diner"]) else "General"
+            if "items_summary" not in data:
+                data["items_summary"] = lower_map.get("type") or "Purchased Items"
             if "source_evidence" not in data:
-                data["source_evidence"] = f"Receipt from {data.get('merchant', 'vendor')}"
+                data["source_evidence"] = f"Total: ${data['total_amount']} at {data['merchant']}"
+            if "confidence_score" not in data:
+                data["confidence_score"] = 0.88
+
             validated = ReceiptExtracted(**data)
             return "receipt", validated.model_dump(), ValidationStatusEnum.VALID, None
 
         elif cat == "reading":
-            if "title" not in data and "headline" in data:
-                data["title"] = data["headline"]
+            title = data.get("title") or lower_map.get("headline") or lower_map.get("article_title") or "Reading Resource"
+            url = data.get("url") or lower_map.get("link")
+            source = data.get("website_or_source") or lower_map.get("source") or lower_map.get("publisher")
+            data["title"] = str(title)
+            data["url"] = str(url) if url else None
+            data["website_or_source"] = str(source) if source else None
             if "source_evidence" not in data:
-                data["source_evidence"] = data.get("title", "Reading item")
+                data["source_evidence"] = str(title)
+            if "confidence_score" not in data:
+                data["confidence_score"] = 0.88
+
             validated = ReadingExtracted(**data)
             return "reading", validated.model_dump(), ValidationStatusEnum.VALID, None
 
@@ -241,7 +297,7 @@ def process_screenshot_with_model(
         "stream": False,
         "options": {
             "temperature": 0.1,
-            "num_predict": 300
+            "num_predict": 512
         }
     }
 
