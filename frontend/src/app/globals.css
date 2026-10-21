@@ -1,40 +1,95 @@
 @import "tailwindcss";
 
-:root {
-  --background: #FBF9F5;
-  --foreground: #1A1917;
-  --surface: #FFFFFF;
-  --surface-muted: #F4F1EA;
-  --border: #E8E4DC;
-  --border-strong: #D5CFC3;
-  --accent: #2B593F;
-  --accent-light: #EBF3EE;
-  --accent-foreground: #FFFFFF;
-  --warning: #B45309;
-  --warning-bg: #FEF3C7;
-  --muted: #736E66;
+@layer base {
+  :root {
+    --background: #F7F5EE;
+    --background-paper: #FAF8F2;
+    --foreground: #181613;
+    --surface: #FFFFFF;
+    --surface-elevated: #FCFBF7;
+    --surface-muted: #F2EFE7;
+    
+    --border: #E5DFD3;
+    --border-strong: #D1C9B8;
+    --border-subtle: #EFECE4;
+    
+    /* Primary Brand: Editorial Forest */
+    --accent: #1E3F2E;
+    --accent-hover: #152E21;
+    --accent-light: #E7EFEA;
+    --accent-foreground: #FFFFFF;
+
+    /* Category Accents */
+    --cat-event: #1F4E38;
+    --cat-event-bg: #EAF4EE;
+    --cat-event-border: #C8E3D2;
+    
+    --cat-receipt: #A24222;
+    --cat-receipt-bg: #FBEFEA;
+    --cat-receipt-border: #F3D2C4;
+    
+    --cat-reading: #5C3252;
+    --cat-reading-bg: #F5EDF3;
+    --cat-reading-border: #E5D0E0;
+    
+    --cat-review: #9B5808;
+    --cat-review-bg: #FEF6EB;
+    --cat-review-border: #F8DFB7;
+
+    --muted: #6E685E;
+    --muted-light: #8E877C;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-image: 
+      radial-gradient(at 10% 10%, rgba(240, 235, 222, 0.45) 0px, transparent 60%),
+      radial-gradient(at 90% 90%, rgba(230, 224, 208, 0.35) 0px, transparent 60%);
+    background-attachment: fixed;
+  }
+
+  /* Editorial Serif Styling */
+  .font-editorial {
+    font-family: "Newsreader", "Playfair Display", Georgia, Cambria, "Times New Roman", serif;
+    letter-spacing: -0.015em;
+  }
 }
 
-body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Custom scrollbar for clean ledger aesthetic */
+/* Custom Scrollbars */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--background);
+  background: #F4F1EA;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--border-strong);
-  border-radius: 3px;
+  background: #D1C9B8;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--muted);
+  background: #A89F8D;
+}
+
+/* Paper card subtle drop shadows */
+.shadow-paper {
+  box-shadow: 
+    0 1px 2px rgba(24, 22, 19, 0.04),
+    0 4px 12px -2px rgba(24, 22, 19, 0.03);
+}
+
+.shadow-paper-hover {
+  box-shadow: 
+    0 2px 4px rgba(24, 22, 19, 0.05),
+    0 8px 24px -4px rgba(24, 22, 19, 0.07);
+}
+
+.shadow-modal {
+  box-shadow: 
+    0 8px 32px -4px rgba(20, 18, 15, 0.16),
+    0 2px 8px -1px rgba(20, 18, 15, 0.08);
 }

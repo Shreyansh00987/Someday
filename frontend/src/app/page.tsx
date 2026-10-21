@@ -12,7 +12,12 @@ import {
   Calendar, 
   Receipt, 
   BookOpen, 
-  AlertCircle 
+  AlertCircle,
+  Coffee,
+  Check,
+  FileSpreadsheet,
+  FileText,
+  X
 } from "lucide-react";
 import { 
   Item, 
@@ -168,7 +173,7 @@ export default function MorningLedgerPage() {
   }, [itemsData, activeTab, searchQuery]);
 
   return (
-    <div className="min-h-screen bg-[#FBF9F5] text-[#1A1917]">
+    <div className="min-h-screen bg-[#F7F5EE] text-[#181613]">
       {/* Header */}
       <Header
         status={queueStatus}
@@ -183,9 +188,9 @@ export default function MorningLedgerPage() {
       {/* Main Ledger Container */}
       <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
         {/* Navigation Tabs & Search Toolbar */}
-        <div className="flex flex-col gap-4 border-b border-[#E8E4DC] pb-4 md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col gap-4 border-b border-[#E5DFD3] pb-4 md:flex-row md:items-center md:justify-between">
           {/* Filter Tabs */}
-          <div className="flex flex-wrap items-center gap-1">
+          <div className="flex flex-wrap items-center gap-1.5">
             {[
               { id: "all", label: "All Items" },
               { id: "event", label: "Events", icon: Calendar },
@@ -201,18 +206,18 @@ export default function MorningLedgerPage() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition ${
+                  className={`inline-flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-xs font-medium transition-all ${
                     isActive
-                      ? "bg-[#2B593F] text-white shadow-xs"
-                      : "text-[#736E66] hover:bg-[#F4F1EA] hover:text-[#1A1917]"
+                      ? "bg-[#1E3F2E] text-white shadow-xs font-semibold"
+                      : "text-[#6E685E] bg-[#FFFFFF] border border-[#E5DFD3] hover:bg-[#F2EFE7] hover:text-[#181613]"
                   }`}
                 >
                   {Icon && <Icon className="h-3.5 w-3.5" />}
-                  {tab.label}
+                  <span>{tab.label}</span>
                   {tab.badge !== undefined && tab.badge > 0 && (
                     <span
                       className={`ml-1 rounded-full px-1.5 py-0.2 text-[10px] font-bold ${
-                        isActive ? "bg-white text-[#2B593F]" : "bg-amber-100 text-amber-800"
+                        isActive ? "bg-white text-[#1E3F2E]" : "bg-amber-100 text-[#9B5808]"
                       }`}
                     >
                       {tab.badge}
@@ -224,65 +229,88 @@ export default function MorningLedgerPage() {
           </div>
 
           {/* Search Input & Action Controls */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
             <div className="relative">
-              <Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-[#736E66]" />
+              <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-[#787166]" />
               <input
                 type="text"
-                placeholder="Search ledger..."
+                placeholder="Search ledger entries..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-48 sm:w-64 rounded-lg border border-[#E8E4DC] bg-[#FFFFFF] py-1.5 pl-8 pr-3 text-xs text-[#1A1917] placeholder-[#736E66] focus:border-[#2B593F] focus:outline-hidden"
+                className="w-48 sm:w-64 rounded-lg border border-[#E5DFD3] bg-[#FFFFFF] py-1.5 pl-8.5 pr-3 text-xs text-[#181613] placeholder-[#787166] shadow-xs focus:border-[#1E3F2E] focus:outline-hidden"
               />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-2.5 top-2.5 text-[#787166] hover:text-[#181613]"
+                >
+                  <X className="h-3 w-3" />
+                </button>
+              )}
             </div>
 
             {/* Export Menu Dropdown */}
             <div className="relative">
               <button
                 onClick={() => setExportMenuOpen(!exportMenuOpen)}
-                className="inline-flex items-center gap-1.5 rounded-lg border border-[#E8E4DC] bg-[#FFFFFF] px-3 py-1.5 text-xs font-medium text-[#1A1917] shadow-xs hover:bg-[#F4F1EA] transition"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-[#E5DFD3] bg-[#FFFFFF] px-3.5 py-1.5 text-xs font-semibold text-[#181613] shadow-xs hover:bg-[#F7F4EC] transition"
               >
-                <Download className="h-3.5 w-3.5 text-[#2B593F]" />
+                <Download className="h-3.5 w-3.5 text-[#1E3F2E]" />
                 Export
               </button>
 
               {exportMenuOpen && (
-                <div className="absolute right-0 mt-1.5 w-52 rounded-lg border border-[#E8E4DC] bg-[#FFFFFF] p-1 shadow-lg z-20 text-xs">
+                <div className="absolute right-0 mt-2 w-56 rounded-xl border border-[#E5DFD3] bg-[#FFFFFF] p-1.5 shadow-modal z-30 text-xs animate-in fade-in duration-150">
+                  <div className="px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-[#787166] border-b border-[#EFECE4]">
+                    Export Approved Items
+                  </div>
                   <a
                     href={getExportUrl("calendar")}
                     download
                     onClick={() => setExportMenuOpen(false)}
-                    className="flex items-center gap-2 rounded px-3 py-2 text-[#1A1917] hover:bg-[#F4F1EA]"
+                    className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[#181613] hover:bg-[#EAF4EE] hover:text-[#1F4E38] transition"
                   >
-                    <Calendar className="h-3.5 w-3.5 text-blue-600" />
-                    Export Calendar (.ics)
+                    <Calendar className="h-4 w-4 text-[#1F4E38]" />
+                    <div>
+                      <div className="font-medium">Calendar (.ics)</div>
+                      <div className="text-[10px] text-[#787166]">For Apple &amp; Google Calendar</div>
+                    </div>
                   </a>
                   <a
                     href={getExportUrl("expenses")}
                     download
                     onClick={() => setExportMenuOpen(false)}
-                    className="flex items-center gap-2 rounded px-3 py-2 text-[#1A1917] hover:bg-[#F4F1EA]"
+                    className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[#181613] hover:bg-[#FBEFEA] hover:text-[#A24222] transition"
                   >
-                    <Receipt className="h-3.5 w-3.5 text-emerald-600" />
-                    Export Expenses (CSV)
+                    <FileSpreadsheet className="h-4 w-4 text-[#A24222]" />
+                    <div>
+                      <div className="font-medium">Expenses (.csv)</div>
+                      <div className="text-[10px] text-[#787166]">For Excel &amp; QuickBooks</div>
+                    </div>
                   </a>
                   <a
                     href={getExportUrl("reading", "csv")}
                     download
                     onClick={() => setExportMenuOpen(false)}
-                    className="flex items-center gap-2 rounded px-3 py-2 text-[#1A1917] hover:bg-[#F4F1EA]"
+                    className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[#181613] hover:bg-[#F5EDF3] hover:text-[#5C3252] transition"
                   >
-                    <BookOpen className="h-3.5 w-3.5 text-purple-600" />
-                    Export Reading (CSV)
+                    <BookOpen className="h-4 w-4 text-[#5C3252]" />
+                    <div>
+                      <div className="font-medium">Reading List (.csv)</div>
+                      <div className="text-[10px] text-[#787166]">Spreadsheet format</div>
+                    </div>
                   </a>
                   <a
                     href={getExportUrl("reading", "json")}
                     download
                     onClick={() => setExportMenuOpen(false)}
-                    className="flex items-center gap-2 rounded px-3 py-2 text-[#1A1917] hover:bg-[#F4F1EA]"
+                    className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[#181613] hover:bg-[#F5EDF3] hover:text-[#5C3252] transition"
                   >
-                    <BookOpen className="h-3.5 w-3.5 text-purple-600" />
-                    Export Reading (JSON)
+                    <FileText className="h-4 w-4 text-[#5C3252]" />
+                    <div>
+                      <div className="font-medium">Reading List (.json)</div>
+                      <div className="text-[10px] text-[#787166]">Structured developer format</div>
+                    </div>
                   </a>
                 </div>
               )}
@@ -292,7 +320,7 @@ export default function MorningLedgerPage() {
             {selectedIds.size > 0 && (
               <button
                 onClick={handleBulkApprove}
-                className="inline-flex items-center gap-1.5 rounded-lg bg-[#2B593F] px-3 py-1.5 text-xs font-medium text-white shadow-xs hover:bg-[#234732] transition"
+                className="inline-flex items-center gap-1.5 rounded-lg bg-[#1E3F2E] px-3.5 py-1.5 text-xs font-semibold text-white shadow-xs hover:bg-[#152E21] transition active:scale-95"
               >
                 <CheckCheck className="h-3.5 w-3.5" />
                 Approve ({selectedIds.size})
@@ -302,10 +330,10 @@ export default function MorningLedgerPage() {
         </div>
 
         {/* Ledger Activity List */}
-        <div className="mt-6 overflow-hidden rounded-xl border border-[#E8E4DC] bg-[#FFFFFF] shadow-xs">
+        <div className="mt-6 overflow-hidden rounded-2xl border border-[#E5DFD3] bg-[#FFFFFF] shadow-paper">
           {/* Ledger Table Header */}
-          <div className="flex items-center justify-between border-b border-[#E8E4DC] bg-[#F4F1EA] px-4 py-3 text-xs font-semibold text-[#736E66]">
-            <div className="flex items-center gap-3">
+          <div className="flex items-center justify-between border-b border-[#E5DFD3] bg-[#F7F5EE] px-5 py-3 text-xs font-semibold text-[#6E685E]">
+            <div className="flex items-center gap-3.5">
               <input
                 type="checkbox"
                 checked={
@@ -313,48 +341,55 @@ export default function MorningLedgerPage() {
                   filteredItems.every((i) => selectedIds.has(i.id))
                 }
                 onChange={(e) => handleSelectAll(e.target.checked)}
-                className="h-4 w-4 rounded border-[#D5CFC3] text-[#2B593F] focus:ring-[#2B593F]"
+                className="h-4 w-4 rounded border-[#D1C9B8] text-[#1E3F2E] focus:ring-[#1E3F2E] cursor-pointer"
               />
-              <span>Screenshots & Extracted Intent</span>
+              <span className="font-medium tracking-wide uppercase text-[11px] text-[#575147]">
+                Extracted Screenshots &amp; Intent
+              </span>
             </div>
-            <div className="flex items-center gap-8 pr-2">
-              <span className="hidden sm:inline">Key Details</span>
-              <span>Review Action</span>
+            <div className="flex items-center gap-10 pr-2">
+              <span className="hidden sm:inline font-medium tracking-wide uppercase text-[11px] text-[#575147]">
+                Key Detail
+              </span>
+              <span className="font-medium tracking-wide uppercase text-[11px] text-[#575147]">
+                Human Review
+              </span>
             </div>
           </div>
 
           {/* Ledger Rows */}
           {isLoading ? (
-            <div className="flex flex-col items-center justify-center py-20 text-[#736E66]">
-              <Sparkles className="h-8 w-8 animate-pulse text-[#2B593F] mb-3" />
-              <p className="font-serif text-sm">Opening Morning Ledger...</p>
+            <div className="flex flex-col items-center justify-center py-24 text-[#6E685E]">
+              <Sparkles className="h-8 w-8 animate-pulse text-[#1E3F2E] mb-3" />
+              <p className="font-editorial text-lg text-[#181613]">Opening Morning Ledger...</p>
+              <p className="text-xs text-[#787166] mt-1">Reading local SQLite database</p>
             </div>
           ) : filteredItems.length === 0 ? (
-            /* Empty State */
+            /* Slow & Steady Empty State */
             <div className="flex flex-col items-center justify-center py-20 text-center px-4">
-              <div className="h-12 w-12 rounded-full bg-[#EBF3EE] flex items-center justify-center text-[#2B593F] mb-4">
-                <Inbox className="h-6 w-6" />
+              <div className="h-16 w-16 rounded-full bg-[#E7EFEA] flex items-center justify-center text-[#1E3F2E] mb-4 shadow-xs">
+                <Coffee className="h-8 w-8" />
               </div>
-              <h3 className="font-serif text-lg font-bold text-[#1A1917]">
+              <h3 className="font-editorial text-2xl font-bold text-[#181613]">
                 Your Morning Ledger is Clear
               </h3>
-              <p className="mt-1.5 max-w-md text-xs text-[#736E66] leading-relaxed">
-                Add screenshot images to your watched folder, or trigger a scan.
-                Someday will classify the intent, extract dates and totals, and list them here for your review.
+              <p className="mt-2 max-w-md text-xs text-[#6E685E] leading-relaxed">
+                Take screenshots of events, receipts, or articles whenever you browse.
+                Someday processes them quietly in the background so you never have to type them out by hand.
               </p>
-              <div className="mt-5 flex items-center gap-3">
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
                 <button
                   onClick={handleScan}
-                  className="inline-flex items-center gap-1.5 rounded-lg bg-[#2B593F] px-4 py-2 text-xs font-medium text-white shadow-xs hover:bg-[#234732] transition"
+                  className="inline-flex items-center gap-1.5 rounded-lg bg-[#1E3F2E] px-4 py-2 text-xs font-semibold text-white shadow-xs hover:bg-[#152E21] transition active:scale-95"
                 >
                   <Sparkles className="h-3.5 w-3.5" />
                   Scan Watched Folder
                 </button>
                 <button
                   onClick={() => setIsSettingsOpen(true)}
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-[#E8E4DC] bg-[#FFFFFF] px-4 py-2 text-xs font-medium text-[#1A1917] hover:bg-[#F4F1EA] transition"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-[#E5DFD3] bg-[#FFFFFF] px-4 py-2 text-xs font-medium text-[#181613] hover:bg-[#F7F4EC] transition"
                 >
-                  <FolderPlus className="h-3.5 w-3.5 text-[#736E66]" />
+                  <FolderPlus className="h-3.5 w-3.5 text-[#6E685E]" />
                   Configure Folder
                 </button>
               </div>
@@ -375,7 +410,7 @@ export default function MorningLedgerPage() {
         </div>
       </main>
 
-      {/* Inspector Modal (Evidence Grounding & Field Editor) */}
+      {/* Inspector Modal */}
       <InspectorModal
         item={inspectedItem}
         onClose={() => setInspectedItem(null)}
