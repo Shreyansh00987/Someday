@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scene 1 - The Screenshot Clutter</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0E0D0B;
+      color: #F7F5EE;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(234, 244, 238, 0.1);
+      border: 1px solid rgba(200, 227, 210, 0.25);
+      color: #72C798;
+      padding: 8px 18px;
+      border-radius: 9999px;
+      font-size: 18px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-size: 72px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      color: #FAF8F2;
+    }
+    h1 span {
+      color: #8ED4AD;
+    }
+    p.tagline {
+      font-size: 32px;
+      color: #B4B0A4;
+      font-weight: 400;
+      max-width: 900px;
+      text-align: center;
+      line-height: 1.4;
+      margin-bottom: 60px;
+    }
+    .cards-container {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      justify-content: center;
+      perspective: 1000px;
+    }
+    .card {
+      background: #181613;
+      border: 1px solid #2B2824;
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      width: 320px;
+      transition: all 0.5s ease;
+    }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 14px;
+    }
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #F7F5EE;
+      margin-bottom: 6px;
+    }
+    .card-subtitle {
+      font-size: 14px;
+      color: #938F85;
+      display: flex;
+      justify-content: space-between;
+    }
+    .card:nth-child(1) { transform: rotate(-6deg) translateY(10px); }
+    .card:nth-child(2) { transform: rotate(2deg) translateY(-15px) scale(1.05); border-color: #433D35; }
+    .card:nth-child(3) { transform: rotate(5deg) translateY(8px); }
+    .footer-note {
+      position: absolute;
+      bottom: 40px;
+      font-size: 20px;
+      color: #69655D;
+    }
+  </style>
+</head>
+<body>
+  <div class="badge">
+    <span>●</span> Hacktoberfest Open-Source AI Challenge · Slow & Steady
+  </div>
+  <h1>Someday<span>.</span></h1>
+  <p class="tagline">Your screenshots are a to-do list.<br><strong>Someday finishes them.</strong></p>
+
+  <div class="cards-container">
+    <div class="card">
+      <img src="../backend/sample_screenshots/event_summit_poster.png" alt="Event">
+      <div class="card-title">Event Poster</div>
+      <div class="card-subtitle">
+        <span>"Tomorrow at 7 PM"</span>
+        <span style="color: #E27D60;">Forgotten</span>
+      </div>
+    </div>
+    <div class="card">
+      <img src="../backend/sample_screenshots/restaurant_dinner_bill.png" alt="Receipt">
+      <div class="card-title">Dinner Bill</div>
+      <div class="card-subtitle">
+        <span>"Unreported Expense"</span>
+        <span style="color: #E27D60;">Postponed</span>
+      </div>
+    </div>
+    <div class="card">
+      <img src="../backend/sample_screenshots/reading_github_ollama.png" alt="Reading">
+      <div class="card-title">Technical Article</div>
+      <div class="card-subtitle">
+        <span>"Read Later"</span>
+        <span style="color: #E27D60;">Unread</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-note">The Digital Graveyard: 100+ Screenshots Never Acted On</div>
+</body>
+</html>

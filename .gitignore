@@ -16,3 +16,8 @@ frontend/out/
 # OS
 .DS_Store
 Thumbs.db
+
+# Demo Video Intermediate files
+demo_video/recordings/
+demo_video/clips/
+demo_video/audio/

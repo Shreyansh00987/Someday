@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scene 4 - Deterministic Date Resolution</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0E0D0B;
+      color: #F7F5EE;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(31, 78, 56, 0.3);
+      border: 1px solid rgba(142, 212, 173, 0.4);
+      color: #8ED4AD;
+      padding: 8px 18px;
+      border-radius: 9999px;
+      font-size: 16px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+    h2 {
+      font-size: 56px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    p.sub {
+      font-size: 24px;
+      color: #9E9A90;
+      margin-bottom: 50px;
+      text-align: center;
+    }
+    .flow-container {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      background: #181613;
+      border: 1px solid #2B2824;
+      border-radius: 20px;
+      padding: 48px 56px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    }
+    .step-box {
+      background: #201D1A;
+      border: 1px solid #36322C;
+      border-radius: 14px;
+      padding: 24px 28px;
+      min-width: 300px;
+    }
+    .step-label {
+      font-size: 13px;
+      text-transform: uppercase;
+      color: #8C887E;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    .step-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: #FAF8F2;
+      font-family: monospace;
+    }
+    .step-sub {
+      font-size: 14px;
+      color: #B4B0A4;
+      margin-top: 8px;
+    }
+    .arrow {
+      font-size: 32px;
+      color: #8ED4AD;
+      font-weight: bold;
+    }
+    .engine-box {
+      background: #1B2921;
+      border: 1px solid #294837;
+      text-align: center;
+    }
+    .engine-box .step-value {
+      color: #8ED4AD;
+    }
+    .guarantee-bar {
+      margin-top: 48px;
+      display: flex;
+      gap: 32px;
+      color: #B4B0A4;
+      font-size: 18px;
+    }
+    .guarantee-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .check {
+      color: #8ED4AD;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="badge">
+    <span>🛡️</span> Mathematical Date Engine · Zero Hallucination
+  </div>
+  <h2>Deterministic Relative Date Arithmetic</h2>
+  <p class="sub">Vision models extract textual evidence. Python deterministically anchors calendar timestamps.</p>
+
+  <div class="flow-container">
+    <div class="step-box">
+      <div class="step-label">1. Source Screenshot</div>
+      <div class="step-value">"Tomorrow at 7 PM"</div>
+      <div class="step-sub">File created: Oct 20, 2026 10:56 AM</div>
+    </div>
+
+    <div class="arrow">➔</div>
+
+    <div class="step-box engine-box">
+      <div class="step-label" style="color: #8ED4AD;">2. Deterministic Engine</div>
+      <div class="step-value">date_engine.py</div>
+      <div class="step-sub">Relative delta math (+1 day @ 19:00)</div>
+    </div>
+
+    <div class="arrow">➔</div>
+
+    <div class="step-box" style="border-color: #294837;">
+      <div class="step-label">3. Authoritative RFC-3339</div>
+      <div class="step-value" style="color: #72C798;">2026-10-21T17:00:00</div>
+      <div class="step-sub">Ready for RFC-5545 iCalendar (.ics)</div>
+    </div>
+  </div>
+
+  <div class="guarantee-bar">
+    <div class="guarantee-item"><span class="check">✓</span> No LLM Date Hallucination</div>
+    <div class="guarantee-item"><span class="check">✓</span> Timezone Aware (UTC Anchor)</div>
+    <div class="guarantee-item"><span class="check">✓</span> Verbatim Text Evidence Grounding</div>
+  </div>
+</body>
+</html>
