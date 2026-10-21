@@ -1,0 +1,452 @@
+{
+  "items": [
+    {
+      "id": "export-event-1",
+      "source_path": "/tmp/exp.png",
+      "file_hash": "exphash001",
+      "original_filename": "exp.png",
+      "detected_category": "event",
+      "extracted_fields": {
+        "event_title": "Test Hackathon Presentation",
+        "start_time": "2026-10-28T14:00:00"
+      },
+      "raw_date_expression": null,
+      "resolved_date": "2026-10-28T14:00:00",
+      "evidence_metadata": {},
+      "validation_status": "valid",
+      "processing_status": "completed",
+      "approval_status": "approved",
+      "error_message": null,
+      "created_at": "2026-10-21T18:48:51.154946+00:00",
+      "processed_at": "2026-10-21T18:48:51.154946+00:00",
+      "approved_at": null
+    },
+    {
+      "id": "api-test-item-1",
+      "source_path": "/tmp/api_test.png",
+      "file_hash": "apihash999",
+      "original_filename": "api_test.png",
+      "detected_category": "event",
+      "extracted_fields": {
+        "event_title": "FastAPI Release Party",
+        "start_time": "2026-10-25T19:00:00"
+      },
+      "raw_date_expression": "October 25 at 7 PM",
+      "resolved_date": "2026-10-25T19:00:00",
+      "evidence_metadata": {},
+      "validation_status": "valid",
+      "processing_status": "completed",
+      "approval_status": "approved",
+      "error_message": null,
+      "created_at": "2026-10-21T18:48:51.118874+00:00",
+      "processed_at": "2026-10-21T18:48:51.118874+00:00",
+      "approved_at": "2026-10-21T18:48:51.142763+00:00"
+    },
+    {
+      "id": "c312c085-4e67-456e-9b28-c6f0213d4ff2",
+      "source_path": "D:\\Project\\Someday\\backend\\sample_screenshots\\uncertain_doodle.png",
+      "file_hash": "af8a36868d7ff20e33d4d12516c0616725aa51a8f7f2dd9c4de3863994bd38e1",
+      "original_filename": "uncertain_doodle.png",
+      "detected_category": "uncertain",
+      "extracted_fields": {
+        "category": "uncertain",
+        "summary": "Image analyzed with low certainty",
+        "reason_for_uncertainty": "Does not cleanly match event, receipt, or reading structure",
+        "detected_text_snippets": [],
+        "suggested_action": null,
+        "source_evidence": "Image analyzed with low certainty",
+        "confidence_score": 0.3
+      },
+      "raw_date_expression": null,
+      "resolved_date": null,
+      "evidence_metadata": {
+        "source_evidence": "Image analyzed with low certainty",
+        "file_timestamp": "2026-10-21T10:56:26.385478+00:00",
+        "confidence_score": 0.3
+      },
+      "validation_status": "valid",
+      "processing_status": "completed",
+      "approval_status": "approved",
+      "error_message": null,
+      "created_at": "2026-10-21T18:44:35.720919+00:00",
+      "processed_at": "2026-10-21T18:44:35.720919+00:00",
+      "approved_at": "2026-10-21T18:48:48.452570+00:00"
+    },
+    {
+      "id": "dbd4c250-e3c0-4c27-ad7e-890895b13071",
+      "source_path": "D:\\Project\\Someday\\backend\\sample_screenshots\\restaurant_dinner_bill.png",
+      "file_hash": "a68a233fba8e297ac11f88773332868fc6f276dfda2f490d4269fdbc76336407",
+      "original_filename": "restaurant_dinner_bill.png",
+      "detected_category": "event",
+      "extracted_fields": {
+        "category": "event",
+        "event_title": "Community Event",
+        "raw_date_expression": "01/31/2008 at 12:00",
+        "start_time": "2008-01-31T12:00:00",
+        "end_time": "2008-01-31T13:00:00",
+        "location": null,
+        "description": null,
+        "source_evidence": "Community Event (01/31/2008 at 12:00)",
+        "confidence_score": 0.88
+      },
+      "raw_date_expression": "01/31/2008 at 12:00",
+      "resolved_date": "2008-01-31T12:00:00",
+      "evidence_metadata": {
+        "source_evidence": "Community Event (01/31/2008 at 12:00)",
+        "file_timestamp": "2026-10-21T18:41:16.298358+00:00",
+        "confidence_score": 0.88
+      },
+      "validation_status": "valid",
+      "processing_status": "completed",
+      "approval_status": "approved",
+      "error_message": null,
+      "created_at": "2026-10-21T18:44:30.217914+00:00",
+      "processed_at": "2026-10-21T18:44:30.217914+00:00",
+      "approved_at": "2026-10-21T18:44:37.647643+00:00"
+    },
+    {
+      "id": "0c58b674-ae36-4170-b754-71781335ae2f",
+      "source_path": "D:\\Project\\Someday\\backend\\sample_screenshots\\receipt_coffee_shop.png",
+      "file_hash": "ae64419ce407af69c0623454782214192d864b2ff6a41121e7bd8ffcaa42e134",
+      "original_filename": "receipt_coffee_shop.png",
+      "detected_category": "uncertain",
+      "extracted_fields": {
+        "category": "uncertain",
+        "summary": "Image analyzed with low certainty",
+        "reason_for_uncertainty": "Does not cleanly match event, receipt, or reading structure",
+        "detected_text_snippets": [],
+        "suggested_action": null,
+        "source_evidence": "Image analyzed with low certainty",
+        "confidence_score": 0.3
+      },
+      "raw_date_expression": null,
+      "resolved_date": null,
+      "evidence_metadata": {
+        "source_evidence": "Image analyzed with low certainty",
+        "file_timestamp": "2026-10-21T10:56:26.371865+00:00",
+        "confidence_score": 0.3
+      },
+      "validation_status": "valid",
+      "processing_status": "completed",
+      "approval_status": "approved",
+      "error_message": null,
+      "created_at": "2026-10-21T18:44:24.890148+00:00",
+      "processed_at": "2026-10-21T18:44:24.890148+00:00",
+      "approved_at": "2026-10-21T18:44:37.665042+00:00"
+    },
+    {
+      "id": "9e29db43-5f4a-41b6-ba86-a3fbea58c739",
+      "source_path": "D:\\Project\\Someday\\backend\\sample_screenshots\\reading_pragmatic_engineer.png",
+      "file_hash": "c246b5cafe673fad51b396fa3c7fab60913a1d51fb27b47d4b4a80183eb6653a",
+      "original_filename": "reading_pragmatic_engineer.png",
+      "detected_category": "reading",
+      "extracted_fields": {
+        "category": "reading",
+        "title": "Reading Resource",
+        "url": "http://www.thepynativeengineer.com/newsletter/prog/architecture/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news/architecture-news",
+        "website_or_source": null,
+        "author": null,
+        "description": null,
+        "source_evidence": "Reading Resource",
+        "confidence_score": 0.88
+      },
+      "raw_date_expression": null,
+      "resolved_date": null,
+      "evidence_metadata": {
+        "source_evidence": "Reading Resource",
+        "file_timestamp": "2026-10-21T10:56:26.382233+00:00",
+        "confidence_score": 0.88
+      },
+      "validation_status": "valid",
+      "processing_status": "completed",
+      "approval_status": "approved",
+      "error_message": null,
+      "created_at": "2026-10-21T18:44:19.334107+00:00",
+      "processed_at": "2026-10-21T18:44:19.334107+00:00",
+      "approved_at": "2026-10-21T18:44:37.681974+00:00"
+    },
+    {
+      "id": "caac4294-e354-4983-8e64-e943d989933a",
+      "source_path": "D:\\Project\\Someday\\backend\\sample_screenshots\\flight_boarding_pass.png",
+      "file_hash": "ec4047627940c6d6c66e19e3cfb9467a33480d40b7c122634fb29e41c8c69d89",
+      "original_filename": "flight_boarding_pass.png",
+      "detected_category": "uncertain",
+      "extracted_fields": {
+        "category": "uncertain",
+        "summary": "Image analyzed with low certainty",
+        "reason_for_uncertainty": "Does not cleanly match event, receipt, or reading structure",
+        "detected_text_snippets": [],
+        "suggested_action": null,
+        "source_evidence": "Image analyzed with low certainty",
+        "confidence_score": 0.3
+      },
+      "raw_date_expression": null,
+      "resolved_date": null,
+      "evidence_metadata": {
+        "source_evidence": "Image analyzed with low certainty",
+        "file_timestamp": "2026-10-21T18:41:16.287592+00:00",
+        "confidence_score": 0.3
+      },
+      "validation_status": "valid",
+      "processing_status": "completed",
+      "approval_status": "approved",
+      "error_message": null,
+      "created_at": "2026-10-21T18:44:12.343882+00:00",
+      "processed_at": "2026-10-21T18:44:12.343882+00:00",
+      "approved_at": "2026-10-21T18:44:37.705998+00:00"
+    },
+    {
+      "id": "f4929423-4450-4161-b13f-579fe87a693e",
+      "source_path": "D:\\Project\\Someday\\backend\\sample_screenshots\\event_summit_poster.png",
+      "file_hash": "48902cf6fa9594bcd38325c38178ea206ca479d3b4c03e97253ac08f06f5205c",
+      "original_filename": "event_summit_poster.png",
+      "detected_category": "event",
+      "extracted_fields": {
+        "category": "event",
+        "event_title": "Community Event",
+        "raw_date_expression": "17:00",
+        "start_time": "2026-10-21T17:00:00",
+        "end_time": "2026-10-21T18:00:00",
+        "location": null,
+        "description": null,
+        "source_evidence": "Community Event (17:00)",
+        "confidence_score": 0.88
+      },
+      "raw_date_expression": "17:00",
+      "resolved_date": "2026-10-21T17:00:00",
+      "evidence_metadata": {
+        "source_evidence": "Community Event (17:00)",
+        "file_timestamp": "2026-10-21T10:56:26.364688+00:00",
+        "confidence_score": 0.88
+      },
+      "validation_status": "valid",
+      "processing_status": "completed",
+      "approval_status": "approved",
+      "error_message": null,
+      "created_at": "2026-10-21T18:44:06.893613+00:00",
+      "processed_at": "2026-10-21T18:44:06.893613+00:00",
+      "approved_at": "2026-10-21T18:44:37.728851+00:00"
+    },
+    {
+      "id": "df6e76db-3e6c-4688-9d1b-119ecdd8224b",
+      "source_path": "D:\\Project\\Someday\\backend\\sample_screenshots\\reading_github_ollama.png",
+      "file_hash": "500294cd928a8c1305a6483b559683e1bf8bd5cc79b0d3026a12696a28245fea",
+      "original_filename": "reading_github_ollama.png",
+      "detected_category": "reading",
+      "extracted_fields": {
+        "category": "reading",
+        "title": "Reading Resource",
+        "url": "https://github.com/Git",
+        "website_or_source": null,
+        "author": "Jeffery G. O'Malley",
+        "description": null,
+        "source_evidence": "Reading Resource",
+        "confidence_score": 0.88
+      },
+      "raw_date_expression": null,
+      "resolved_date": null,
+      "evidence_metadata": {
+        "source_evidence": "Reading Resource",
+        "file_timestamp": "2026-10-21T18:41:16.303620+00:00",
+        "confidence_score": 0.88
+      },
+      "validation_status": "valid",
+      "processing_status": "completed",
+      "approval_status": "approved",
+      "error_message": null,
+      "created_at": "2026-10-21T18:41:30.549719+00:00",
+      "processed_at": "2026-10-21T18:41:30.549719+00:00",
+      "approved_at": "2026-10-21T18:42:35.723699+00:00"
+    },
+    {
+      "id": "a8454da2-b5a0-4e39-9065-f4c256f383e4",
+      "source_path": "D:\\Project\\Someday\\backend\\sample_screenshots\\corrupted_screenshot.png",
+      "file_hash": "9d0b9ec38867a4e8e81796f6c2dddc0452d4c0b9a6c0e20162c97985d40aee5f",
+      "original_filename": "corrupted_screenshot.png",
+      "detected_category": "uncertain",
+      "extracted_fields": {
+        "summary": "Corrupted or unreadable image file",
+        "reason_for_uncertainty": "Pillow could not decode image headers",
+        "detected_text_snippets": [],
+        "source_evidence": "Unreadable file"
+      },
+      "raw_date_expression": null,
+      "resolved_date": null,
+      "evidence_metadata": {},
+      "validation_status": "failed",
+      "processing_status": "failed",
+      "approval_status": "rejected",
+      "error_message": "Corrupted image file: decode failed",
+      "created_at": "2026-10-21T11:05:08.923132+00:00",
+      "processed_at": "2026-10-21T11:05:08.923132+00:00",
+      "approved_at": null
+    }
+  ],
+  "runs": [
+    {
+      "id": "d2a62f6d-92ac-465b-a88a-e4f300b72d6c",
+      "model_name": "moondream",
+      "model_version": "ollama",
+      "start_time": "2026-10-21T18:44:30.426085+00:00",
+      "end_time": "2026-10-21T18:44:35.723199+00:00",
+      "items_processed": 1,
+      "items_succeeded": 1,
+      "items_failed": 0,
+      "measured_latency_ms": 5294.170600012876,
+      "peak_memory_mb": null
+    },
+    {
+      "id": "85744639-fe1c-4edc-ae75-0a732125622f",
+      "model_name": "moondream",
+      "model_version": "ollama",
+      "start_time": "2026-10-21T18:44:25.098455+00:00",
+      "end_time": "2026-10-21T18:44:30.220141+00:00",
+      "items_processed": 1,
+      "items_succeeded": 1,
+      "items_failed": 0,
+      "measured_latency_ms": 5118.854200001806,
+      "peak_memory_mb": null
+    },
+    {
+      "id": "b8126597-3300-4a93-b7e8-131e05832bbb",
+      "model_name": "moondream",
+      "model_version": "ollama",
+      "start_time": "2026-10-21T18:44:19.542284+00:00",
+      "end_time": "2026-10-21T18:44:24.893103+00:00",
+      "items_processed": 1,
+      "items_succeeded": 1,
+      "items_failed": 0,
+      "measured_latency_ms": 5346.908200008329,
+      "peak_memory_mb": null
+    },
+    {
+      "id": "d98f842f-f9cd-4eec-8e43-44f08feff0a3",
+      "model_name": "moondream",
+      "model_version": "ollama",
+      "start_time": "2026-10-21T18:44:12.552870+00:00",
+      "end_time": "2026-10-21T18:44:19.337277+00:00",
+      "items_processed": 1,
+      "items_succeeded": 1,
+      "items_failed": 0,
+      "measured_latency_ms": 6780.480799963698,
+      "peak_memory_mb": null
+    },
+    {
+      "id": "39df612d-2f63-48d1-9c96-ad85bab9256d",
+      "model_name": "moondream",
+      "model_version": "ollama",
+      "start_time": "2026-10-21T18:44:07.101885+00:00",
+      "end_time": "2026-10-21T18:44:12.347514+00:00",
+      "items_processed": 1,
+      "items_succeeded": 1,
+      "items_failed": 0,
+      "measured_latency_ms": 5240.935700014234,
+      "peak_memory_mb": null
+    },
+    {
+      "id": "9c94825b-dd72-4ba3-a897-1cd3e0656818",
+      "model_name": "moondream",
+      "model_version": "ollama",
+      "start_time": "2026-10-21T18:44:05.114693+00:00",
+      "end_time": "2026-10-21T18:44:06.896673+00:00",
+      "items_processed": 1,
+      "items_succeeded": 1,
+      "items_failed": 0,
+      "measured_latency_ms": 1778.2868000213057,
+      "peak_memory_mb": null
+    },
+    {
+      "id": "464703c9-e12e-4b34-85f3-eb209b3e2af4",
+      "model_name": "moondream",
+      "model_version": "ollama",
+      "start_time": "2026-10-21T18:41:30.758292+00:00",
+      "end_time": "2026-10-21T18:41:35.930655+00:00",
+      "items_processed": 1,
+      "items_succeeded": 1,
+      "items_failed": 0,
+      "measured_latency_ms": 5169.687100045849,
+      "peak_memory_mb": null
+    },
+    {
+      "id": "9056e5a7-4d32-4c15-8ecd-25c86ac18b1d",
+      "model_name": "moondream",
+      "model_version": "ollama",
+      "start_time": "2026-10-21T18:41:25.411381+00:00",
+      "end_time": "2026-10-21T18:41:30.552662+00:00",
+      "items_processed": 1,
+      "items_succeeded": 1,
+      "items_failed": 0,
+      "measured_latency_ms": 5137.659400003031,
+      "peak_memory_mb": null
+    },
+    {
+      "id": "1b1fffd0-b4eb-426d-8cba-c93aecb400c6",
+      "model_name": "moondream",
+      "model_version": "ollama",
+      "start_time": "2026-10-21T18:41:17.344064+00:00",
+      "end_time": "2026-10-21T18:41:25.207259+00:00",
+      "items_processed": 1,
+      "items_succeeded": 1,
+      "items_failed": 0,
+      "measured_latency_ms": 7859.48919999646,
+      "peak_memory_mb": null
+    },
+    {
+      "id": "8d9090ed-31a4-4a31-ad22-16475fa8ef6b",
+      "model_name": "gemma2",
+      "model_version": "ollama",
+      "start_time": "2026-10-21T11:05:10.537942+00:00",
+      "end_time": "2026-10-21T11:05:10.768898+00:00",
+      "items_processed": 1,
+      "items_succeeded": 0,
+      "items_failed": 1,
+      "measured_latency_ms": 228.28609999851324,
+      "peak_memory_mb": null
+    },
+    {
+      "id": "00e0af6e-83c9-418c-80ae-9c1f612cea9b",
+      "model_name": "gemma2",
+      "model_version": "ollama",
+      "start_time": "2026-10-21T11:05:10.076922+00:00",
+      "end_time": "2026-10-21T11:05:10.333953+00:00",
+      "items_processed": 1,
+      "items_succeeded": 0,
+      "items_failed": 1,
+      "measured_latency_ms": 254.96560000465252,
+      "peak_memory_mb": null
+    },
+    {
+      "id": "c2075e38-424b-473a-b3ba-8add21627b4c",
+      "model_name": "gemma2",
+      "model_version": "ollama",
+      "start_time": "2026-10-21T11:05:09.620796+00:00",
+      "end_time": "2026-10-21T11:05:09.872826+00:00",
+      "items_processed": 1,
+      "items_succeeded": 0,
+      "items_failed": 1,
+      "measured_latency_ms": 249.74450000445358,
+      "peak_memory_mb": null
+    },
+    {
+      "id": "a01c1464-e8ee-46f4-9536-2e5eb32610ca",
+      "model_name": "gemma2",
+      "model_version": "ollama",
+      "start_time": "2026-10-21T11:05:09.129681+00:00",
+      "end_time": "2026-10-21T11:05:09.415681+00:00",
+      "items_processed": 1,
+      "items_succeeded": 0,
+      "items_failed": 1,
+      "measured_latency_ms": 281.91309998510405,
+      "peak_memory_mb": null
+    }
+  ],
+  "config": {
+    "watch_folder": "D:\\Project\\Someday\\backend\\sample_screenshots",
+    "recursive": "1",
+    "idle_only": "0",
+    "active_model": "moondream",
+    "polling_interval_sec": "4.5",
+    "auto_approve_high_confidence": "0",
+    "is_paused": "0"
+  }
+}

@@ -28,7 +28,8 @@ Someday monitors your screenshot directory in the background. When new screensho
 
 ## Demo
 
-- **Live Application URL (Local):** `http://localhost:3000` (Frontend) & `http://127.0.0.1:8000` (FastAPI Backend)
+- **Live Deployed Application (Vercel Showcase):** [https://someday-ledger.vercel.app](https://someday-ledger.vercel.app)
+- **Local Desktop Application:** `http://localhost:3000` (Frontend) & `http://127.0.0.1:8000` (FastAPI Local Backend)
 - **Primary Visual Moment:** The **Inspector Modal** connects the raw screenshot side-by-side with the model's textual evidence, allowing human-in-the-loop verification and instant approval.
 - **Native Exports:** 
   - Standard RFC-5545 iCalendar (`.ics`) for Apple Calendar, Google Calendar, and Outlook.

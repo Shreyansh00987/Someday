@@ -90,10 +90,22 @@ export interface MetricsSummary {
   };
 }
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+export function getApiBase(): string {
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return process.env.NEXT_PUBLIC_API_URL;
+  }
+  if (typeof window !== "undefined") {
+    const host = window.location.hostname;
+    if (host === "localhost" || host === "127.0.0.1") {
+      return "http://127.0.0.1:8000";
+    }
+    return "";
+  }
+  return "http://127.0.0.1:8000";
+}
 
 export async function fetchQueueStatus(): Promise<QueueStatus> {
-  const res = await fetch(`${API_BASE}/api/status`, { cache: "no-store" });
+  const res = await fetch(`${getApiBase()}/api/status`, { cache: "no-store" });
   if (!res.ok) throw new Error("Failed to fetch status");
   return res.json();
 }
@@ -110,23 +122,23 @@ export async function fetchItems(params?: {
   if (params?.validation_status) query.set("validation_status", params.validation_status);
   if (params?.search) query.set("search", params.search);
 
-  const res = await fetch(`${API_BASE}/api/items?${query.toString()}`, { cache: "no-store" });
+  const res = await fetch(`${getApiBase()}/api/items?${query.toString()}`, { cache: "no-store" });
   if (!res.ok) throw new Error("Failed to fetch items");
   return res.json();
 }
 
 export async function approveItem(id: string): Promise<void> {
-  const res = await fetch(`${API_BASE}/api/items/${id}/approve`, { method: "POST" });
+  const res = await fetch(`${getApiBase()}/api/items/${id}/approve`, { method: "POST" });
   if (!res.ok) throw new Error("Approval failed");
 }
 
 export async function rejectItem(id: string): Promise<void> {
-  const res = await fetch(`${API_BASE}/api/items/${id}/reject`, { method: "POST" });
+  const res = await fetch(`${getApiBase()}/api/items/${id}/reject`, { method: "POST" });
   if (!res.ok) throw new Error("Rejection failed");
 }
 
 export async function bulkApproveItems(ids: string[]): Promise<number> {
-  const res = await fetch(`${API_BASE}/api/items/bulk-approve`, {
+  const res = await fetch(`${getApiBase()}/api/items/bulk-approve`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ item_ids: ids }),
@@ -137,7 +149,7 @@ export async function bulkApproveItems(ids: string[]): Promise<number> {
 }
 
 export async function updateItem(id: string, updates: any): Promise<Item> {
-  const res = await fetch(`${API_BASE}/api/items/${id}`, {
+  const res = await fetch(`${getApiBase()}/api/items/${id}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(updates),
@@ -147,13 +159,13 @@ export async function updateItem(id: string, updates: any): Promise<Item> {
 }
 
 export async function fetchConfig(): Promise<SystemConfig> {
-  const res = await fetch(`${API_BASE}/api/config`, { cache: "no-store" });
+  const res = await fetch(`${getApiBase()}/api/config`, { cache: "no-store" });
   if (!res.ok) throw new Error("Failed to fetch config");
   return res.json();
 }
 
 export async function saveConfig(cfg: Partial<SystemConfig>): Promise<void> {
-  const res = await fetch(`${API_BASE}/api/config`, {
+  const res = await fetch(`${getApiBase()}/api/config`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(cfg),
@@ -162,39 +174,39 @@ export async function saveConfig(cfg: Partial<SystemConfig>): Promise<void> {
 }
 
 export async function pauseWatcher(): Promise<void> {
-  await fetch(`${API_BASE}/api/queue/pause`, { method: "POST" });
+  await fetch(`${getApiBase()}/api/queue/pause`, { method: "POST" });
 }
 
 export async function resumeWatcher(): Promise<void> {
-  await fetch(`${API_BASE}/api/queue/resume`, { method: "POST" });
+  await fetch(`${getApiBase()}/api/queue/resume`, { method: "POST" });
 }
 
 export async function triggerImmediateScan(): Promise<{ triggered: number; new_items: number }> {
-  const res = await fetch(`${API_BASE}/api/queue/trigger`, { method: "POST" });
+  const res = await fetch(`${getApiBase()}/api/queue/trigger`, { method: "POST" });
   return res.json();
 }
 
 export async function retryFailedItems(): Promise<{ retried_count: number }> {
-  const res = await fetch(`${API_BASE}/api/queue/retry-failed`, { method: "POST" });
+  const res = await fetch(`${getApiBase()}/api/queue/retry-failed`, { method: "POST" });
   return res.json();
 }
 
 export async function fetchMetrics(): Promise<MetricsSummary> {
-  const res = await fetch(`${API_BASE}/api/metrics`, { cache: "no-store" });
+  const res = await fetch(`${getApiBase()}/api/metrics`, { cache: "no-store" });
   if (!res.ok) throw new Error("Failed to fetch metrics");
   return res.json();
 }
 
 export function getExportUrl(type: "calendar" | "expenses" | "reading", format?: string): string {
-  if (type === "calendar") return `${API_BASE}/api/export/calendar?only_approved=true`;
-  if (type === "expenses") return `${API_BASE}/api/export/expenses?only_approved=true`;
-  return `${API_BASE}/api/export/reading?format=${format || "csv"}&only_approved=true`;
+  if (type === "calendar") return `${getApiBase()}/api/export/calendar?only_approved=true`;
+  if (type === "expenses") return `${getApiBase()}/api/export/expenses?only_approved=true`;
+  return `${getApiBase()}/api/export/reading?format=${format || "csv"}&only_approved=true`;
 }
 
 export function getOriginalImageUrl(itemId: string): string {
-  return `${API_BASE}/api/items/${itemId}/image`;
+  return `${getApiBase()}/api/items/${itemId}/image`;
 }
 
 export function getThumbnailUrl(itemId: string): string {
-  return `${API_BASE}/api/items/${itemId}/thumbnail`;
+  return `${getApiBase()}/api/items/${itemId}/thumbnail`;
 }

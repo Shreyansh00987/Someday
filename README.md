@@ -2,6 +2,9 @@
 
 > **Your screenshots are a to-do list. Someday finishes them.**
 
+🌐 **Live Vercel Interactive Showcase:** [https://someday-ledger.vercel.app](https://someday-ledger.vercel.app)  
+🖥️ **Local-First Privacy Application:** [http://localhost:3000](http://localhost:3000) (Next.js) + [http://127.0.0.1:8000](http://127.0.0.1:8000) (FastAPI + Ollama)
+
 Someday is an open-source, local-first personal AI utility that turns forgotten screenshot folders into completed tasks. Instead of letting screenshots of event posters, dinner receipts, reading lists, and articles accumulate in digital oblivion, Someday monitors your screenshot folder, runs a local open-weight vision-language model, extracts structured actions with evidence grounding, and presents them in a calm morning ledger for your approval.
 
 ---
