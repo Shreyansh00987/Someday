@@ -62,12 +62,14 @@
   - Metrics Modal displaying empirical latency and manual baseline comparison
 - [x] **Automated Evaluation Harness (`backend/eval_harness.py`)**:
   - Ground-truth evaluation dataset with 5 test fixtures
-  - Measured latency: ~10.5s average on RTX 4050 GPU
-  - Measured manual baseline effort savings: ~95% (~120s manual vs ~3s review)
+  - Measured classification accuracy: **80.0%**
+  - Measured latency: **~7.89s average** on NVIDIA RTX 4050 Laptop GPU
+  - Measured manual baseline effort savings: **~95%** (~120s manual vs ~3s review)
   - Generated report at `backend/EVALUATION_REPORT.md`
 - [x] **Automated Test Suite (`backend/tests/`)**:
-  - 18 passing tests across dates, database, exports, API, and end-to-end acceptance
+  - **18/18 passing tests** across dates, database, exports, API, and end-to-end acceptance
   - Clean `next build` with 0 TypeScript/Turbopack errors
+  - 100% verified operational across Ollama, FastAPI, SQLite, and Next.js 16
 
 ---
 
