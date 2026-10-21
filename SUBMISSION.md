@@ -1,7 +1,8 @@
 ---
 title: Someday — Your Screenshots Are a To-Do List. Someday Finishes Them.
 published: true
-tags: devchallenge, hf26challenge, gemma, ai, opensource
+tags: devchallenge, hf26challenge
+cover_image: https://someday-ledger.vercel.app/cover_image.png
 ---
 
 *This is a submission for the [Hacktoberfest Open-Source AI Challenge Week 3: Slow and Steady](https://dev.to/challenges/hacktoberfest-week3-2026-10-19)*
@@ -28,11 +29,13 @@ Someday monitors your screenshot directory in the background. When new screensho
 
 ## Demo
 
-- **Demo Video (1:17 Full HD with AI Narration):** [Download / Stream Demo Video](https://someday-ledger.vercel.app/Someday_Demo_Video_1080p.mp4) · *(Also included in repo at `demo_video/Someday_Demo_Video_1080p.mp4`)*
-- **Live Deployed Application (Vercel Showcase):** [https://someday-ledger.vercel.app](https://someday-ledger.vercel.app)
-- **Local Desktop Application:** `http://localhost:3000` (Frontend) & `http://127.0.0.1:8000` (FastAPI Local Backend)
-- **Primary Visual Moment:** The **Inspector Modal** connects the raw screenshot side-by-side with the model's textual evidence, allowing human-in-the-loop verification and instant approval.
-- **Native Exports:** 
+{% youtube d7m2kpll3Ew %}
+
+- 🌐 **Live Interactive Showcase (Vercel):** **[https://someday-ledger.vercel.app](https://someday-ledger.vercel.app)**
+- 🎬 **YouTube Demo Video (AI Narration):** **[https://youtu.be/d7m2kpll3Ew](https://youtu.be/d7m2kpll3Ew)**
+- 💻 **Local Desktop Application:** `http://localhost:3000` (Frontend) & `http://127.0.0.1:8000` (FastAPI Local Backend)
+- 🔍 **Primary Visual Moment:** The **Inspector Lightbox** connects the raw screenshot side-by-side with the model's verbatim textual evidence quote, enabling human-in-the-loop review and instant approval.
+- 📂 **Multi-Format Native Exports:**
   - Standard RFC-5545 iCalendar (`.ics`) for Apple Calendar, Google Calendar, and Outlook.
   - Expense CSV for Excel, QuickBooks, and Expensify.
   - Reading List CSV / JSON for Notion, Obsidian, and Readwise.
@@ -59,8 +62,9 @@ Someday monitors your screenshot directory in the background. When new screensho
 
 ## Code
 
-The complete source code is open-source and hosted on GitHub:
-👉 **[https://github.com/Shreyansh00987/Someday](https://github.com/Shreyansh00987/Someday)**
+{% github Shreyansh00987/Someday %}
+
+👉 **GitHub Repository:** **[https://github.com/Shreyansh00987/Someday](https://github.com/Shreyansh00987/Someday)**
 
 - **Frontend:** Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4, Lucide Icons, and Impeccable Design System.
 - **Backend:** Python 3.14, FastAPI, SQLite with WAL mode, Pydantic v2, Pillow, `python-dateutil`, `icalendar`.
