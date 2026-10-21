@@ -58,7 +58,9 @@ Someday monitors your screenshot directory in the background. When new screensho
 
 ## Code
 
-The complete source code is available in this repository:
+The complete source code is open-source and hosted on GitHub:
+👉 **[https://github.com/Shreyansh00987/Someday](https://github.com/Shreyansh00987/Someday)**
+
 - **Frontend:** Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4, Lucide Icons, and Impeccable Design System.
 - **Backend:** Python 3.14, FastAPI, SQLite with WAL mode, Pydantic v2, Pillow, `python-dateutil`, `icalendar`.
 - **Inference Runtime:** Local Ollama daemon running open-weight vision models (`moondream` 1.4B and `gemma3:1b`).
