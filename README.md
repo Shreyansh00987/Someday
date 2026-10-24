@@ -2,6 +2,7 @@
 
 > **Your screenshots are a to-do list. Someday finishes them.**
 
+🌐 **Live Render Deployment:** [https://someday-ledger.onrender.com](https://someday-ledger.onrender.com)  
 🌐 **Live Vercel Interactive Showcase:** [https://someday-ledger.vercel.app](https://someday-ledger.vercel.app)  
 🎬 **1-Minute Demo Video (AI Voiceover):** [Watch Demo Video](https://someday-ledger.vercel.app/Someday_Demo_Video_1080p.mp4)  
 🖥️ **Local-First Privacy Application:** [http://localhost:3000](http://localhost:3000) (Next.js) + [http://127.0.0.1:8000](http://127.0.0.1:8000) (FastAPI + Ollama)

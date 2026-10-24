@@ -31,6 +31,7 @@ Someday monitors your screenshot directory in the background. When new screensho
 
 {% youtube d7m2kpll3Ew %}
 
+- 🌐 **Live Render Deployment:** **[https://someday-ledger.onrender.com](https://someday-ledger.onrender.com)**
 - 🌐 **Live Interactive Showcase (Vercel):** **[https://someday-ledger.vercel.app](https://someday-ledger.vercel.app)**
 - 🎬 **YouTube Demo Video (AI Narration):** **[https://youtu.be/d7m2kpll3Ew](https://youtu.be/d7m2kpll3Ew)**
 - 💻 **Local Desktop Application:** `http://localhost:3000` (Frontend) & `http://127.0.0.1:8000` (FastAPI Local Backend)
@@ -143,5 +144,6 @@ In International Sloth Day spirit: **Capture once, do nothing, review over coffe
 ## Prize Categories
 
 ### Featured Categories:
+- **Best Use of Render:** Deployed the interactive Morning Ledger frontend on Render Web Services ([https://someday-ledger.onrender.com](https://someday-ledger.onrender.com)) with infrastructure-as-code automation via Render Blueprints (`render.yaml`).
 - **Best Use of Gemma:** Google Gemma open-weight architecture (`gemma3:1b`) verified, installed, and integrated into our local Ollama registry for structured classification and text reasoning.
 - **Top Prize (Slow and Steady):** Built specifically for Hacktoberfest Week 3 to automate the tedious backlog of digital clutter with quiet, background, local-first intelligence.
